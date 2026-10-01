@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="A tiny USB Christmas tree projector that fills your ceiling with Santa, snowflakes and stars. 2 for $39.99 with free shipping.">
+<meta property="og:title" content="Merrybeam">
+<meta property="og:description" content="Turn any room into Christmas night.">
+<meta property="og:image" content="img/cozy.jpg">
+<style>html{-webkit-text-size-adjust:100%}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Merrybeam</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,700&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: Christmas night in a living room. A twinkling bulb garland on top, snow falling, a rotating projector sky in the hero around the product video. */
+:root{
+  --night:#08130f; --pine:#0f2219; --pine-2:#163126; --line:#264535;
+  --snow:#fbf6ec; --muted:#b4c2b8; --gold:#ffc24a; --red:#e2323f; --red-deep:#9e1424;
+  --display:"Fraunces",Georgia,"Times New Roman",serif;
+  --body:"Bricolage Grotesque",system-ui,-apple-system,Segoe UI,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{overflow-x:clip}
+html{scroll-behavior:smooth}
+body{background:var(--night);color:var(--snow);font:17px/1.6 var(--body)}
+.wrap{max-width:1140px;margin:0 auto;padding-inline:20px;position:relative;z-index:2}
+h1,h2,h3{font-family:var(--display);font-weight:900;line-height:1;margin:0;text-wrap:balance;letter-spacing:-.01em}
+.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+a{color:inherit}
+#snow{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+
+/* garland */
+.garland{position:relative;height:56px;overflow:hidden;z-index:3}
+.garland svg{position:absolute;top:0;left:0;width:100%;height:56px}
+.bulbs{position:absolute;inset:0;display:flex;justify-content:space-around;padding-inline:2%}
+.bulb{position:relative;width:14px;height:22px;border-radius:50% 50% 50% 50%/40% 40% 60% 60%;background:var(--c);box-shadow:0 0 14px 4px var(--c);opacity:.95;margin-top:var(--y)}
+.bulb::before{content:"";position:absolute;top:-6px;left:3px;width:8px;height:7px;border-radius:2px;background:#3b4a40}
+@media (prefers-reduced-motion:no-preference){
+  .bulb{animation:twinkle var(--t) ease-in-out infinite alternate;animation-delay:var(--d)}
+  @keyframes twinkle{0%{opacity:1;box-shadow:0 0 16px 5px var(--c)}100%{opacity:.35;box-shadow:0 0 2px 0 var(--c)}}
+}
+
+nav{display:flex;align-items:center;justify-content:space-between;padding-block:8px 18px}
+.logo{font:900 30px var(--display);text-decoration:none;display:flex;align-items:center;gap:6px}
+.logo span{color:var(--gold);font-style:italic}
+.navcta{font-weight:800;font-size:14px;text-decoration:none;background:var(--red);color:#fff;padding:10px 18px;border-radius:999px;box-shadow:0 0 20px -2px rgba(226,50,63,.6)}
+
+/* hero */
+.hero{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;padding-block:16px 80px}
+.hero h1{font-size:clamp(48px,8vw,104px);margin-top:16px}
+.hero h1 em{font-style:italic;color:var(--gold);text-shadow:0 0 30px rgba(255,194,74,.55)}
+.hero p{color:var(--muted);font-size:19px;max-width:34ch;margin:22px 0 28px}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--red);color:#fff;font:800 17px var(--body);border:0;border-radius:999px;padding:17px 28px;cursor:pointer;text-decoration:none;box-shadow:0 10px 30px -8px rgba(226,50,63,.8);transition:transform .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn:disabled{opacity:.7;cursor:wait;transform:none}
+.facts{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:24px;font-size:14px;color:var(--muted)}
+.facts b{color:var(--snow);font-weight:600}
+
+.stage{position:relative;display:grid;place-items:center;min-height:520px}
+#sky{position:absolute;inset:-60px -40px;width:calc(100% + 80px);height:calc(100% + 120px);z-index:0;opacity:.85}
+.phone{position:relative;z-index:1;width:min(100%,320px);aspect-ratio:9/16;max-width:100%;border-radius:34px;overflow:hidden;border:7px solid #030806;background:#030806;box-shadow:0 0 0 1px var(--line),0 30px 90px -20px rgba(255,194,74,.45)}
+.phone video{width:100%;height:100%;object-fit:cover;display:block}
+.badge{position:absolute;z-index:2;right:2%;top:6%;width:104px;height:104px;border-radius:50%;background:var(--gold);color:#2a1a02;display:grid;place-items:center;text-align:center;font:900 15px/1.05 var(--display);transform:rotate(10deg);box-shadow:0 0 30px rgba(255,194,74,.6)}
+.badge b{display:block;font-size:28px}
+@media (prefers-reduced-motion:no-preference){.badge{animation:sway 3.5s ease-in-out infinite alternate}@keyframes sway{to{transform:rotate(-6deg) translateY(-6px)}}}
+
+/* countdown strip */
+.strip{position:relative;z-index:2;background:var(--red);color:#fff;overflow:hidden}
+.strip .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 28px;padding-block:18px;text-align:center}
+.strip .num{font:900 42px/1 var(--display);font-variant-numeric:tabular-nums}
+.strip .lbl{font:500 12px var(--mono);letter-spacing:.14em;text-transform:uppercase;opacity:.9}
+.strip .unit{display:grid;gap:4px;min-width:64px}
+.strip .msg{font:700 18px var(--display);font-style:italic}
+
+section{position:relative;padding-block:84px}
+.sec-h{display:grid;gap:14px;margin-bottom:40px;max-width:680px}
+.sec-h h2{font-size:clamp(36px,5.5vw,62px)}
+.sec-h p{color:var(--muted);margin:0}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;counter-reset:s}
+.step{background:var(--pine);border:1px solid var(--line);border-radius:22px;padding:26px;display:grid;gap:10px;align-content:start;transition:transform .25s,border-color .25s}
+.step:hover{transform:translateY(-4px);border-color:var(--gold)}
+.step::before{counter-increment:s;content:counter(s);width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font:900 22px var(--display);background:var(--gold);color:#2a1a02;box-shadow:0 0 18px rgba(255,194,74,.5)}
+.step h3{font-size:28px}
+.step p{margin:0;color:var(--muted)}
+
+/* split */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.split .copy{display:grid;gap:16px}
+.split h2{font-size:clamp(36px,5.5vw,62px)}
+.split p{color:var(--muted);margin:0;max-width:44ch}
+.photo{position:relative;border-radius:28px;overflow:hidden;box-shadow:0 30px 80px -30px rgba(0,0,0,.9),0 0 0 1px var(--line)}
+.photo img{width:100%;height:auto;display:block}
+.ticks{list-style:none;padding:0;margin:6px 0 0;display:grid;gap:10px}
+.ticks li{display:flex;gap:12px;align-items:baseline}
+.ticks li::before{content:"✦";color:var(--gold);flex:none}
+
+/* gift band */
+.gift{background:linear-gradient(180deg,var(--red-deep),#6e0d19);overflow:hidden}
+.gift::before{content:"";position:absolute;inset:0;opacity:.18;background:
+  repeating-linear-gradient(45deg,transparent 0 22px,rgba(255,255,255,.5) 22px 24px)}
+.gift .photo{box-shadow:0 30px 80px -20px rgba(0,0,0,.7)}
+.gift .split p{color:#f6d9d9}
+
+/* order */
+.order{display:grid;grid-template-columns:1fr 400px;gap:32px;align-items:start}
+.packs{display:grid;gap:16px}
+.pack{position:relative;display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;text-align:left;width:100%;background:var(--pine);color:var(--snow);border:2px solid var(--line);border-radius:22px;padding:20px 22px;cursor:pointer;font:inherit;transition:border-color .2s,background .2s}
+.pack[aria-pressed="true"]{border-color:var(--gold);background:var(--pine-2);box-shadow:0 0 0 4px rgba(255,194,74,.14),0 0 40px -10px rgba(255,194,74,.5)}
+.pack .dot{width:24px;height:24px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center}
+.pack[aria-pressed="true"] .dot{border-color:var(--gold)}
+.pack[aria-pressed="true"] .dot::after{content:"";width:12px;height:12px;border-radius:50%;background:var(--gold)}
+.pack strong{display:block;font-size:20px}
+.pack span{color:var(--muted);font-size:14px}
+.pack .price{font:900 32px var(--display);text-align:right}
+.pack .price s{display:block;font:500 12px var(--mono);color:var(--muted);text-decoration:none}
+.tag{position:absolute;top:-12px;left:22px;background:var(--red);color:#fff;font:800 11px var(--body);letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:6px}
+.mini{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.mini .photo{border-radius:20px}
+.mini img{aspect-ratio:1;object-fit:cover}
+.cart{position:sticky;top:calc(env(safe-area-inset-top,0px) + 16px);background:var(--snow);color:#13221a;border-radius:24px;padding:26px;display:grid;gap:12px;box-shadow:0 30px 80px -30px rgba(0,0,0,.9),0 0 50px -20px rgba(255,194,74,.5)}
+.cart h3{font-size:28px}
+.row{display:flex;justify-content:space-between;gap:12px;font-variant-numeric:tabular-nums}
+.row .k{color:#56665d}
+.cart hr{border:0;border-top:2px dashed #d5d9d0;margin:4px 0}
+.total{font:900 42px/1 var(--display)}
+.cart .btn{justify-content:center;width:100%}
+.cart .note{font-size:13px;color:#56665d;text-align:center;margin:0}
+.flash{font-size:14px;font-weight:600;background:#fde8c6;color:#5a3a06;border-radius:10px;padding:10px 12px}
+
+/* faq */
+.faq{display:grid;gap:10px;max-width:780px}
+details{background:var(--pine);border:1px solid var(--line);border-radius:18px;padding:18px 22px}
+summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:16px}
+summary::after{content:"+";color:var(--gold);font:900 24px/1 var(--display)}
+details[open] summary::after{content:"–"}
+details p{color:var(--muted);margin:10px 0 0}
+
+footer{position:relative;z-index:2;border-top:1px solid var(--line);padding-block:40px;color:var(--muted);font-size:14px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:end}
+footer .big{font:900 clamp(44px,9vw,96px)/.9 var(--display);color:var(--snow)}
+footer .big span{color:var(--gold);font-style:italic}
+
+@media (max-width:920px){
+  .hero,.split,.order{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  .cart{position:static}
+  .stage{min-height:0;padding-block:20px}
+  #sky{inset:-40px 0;width:100%;height:calc(100% + 80px)}
+  .split .media{order:-1}
+}
+@media (max-width:480px){
+  .badge{width:84px;height:84px;font-size:12px}
+  .badge b{font-size:22px}
+  .strip .num{font-size:34px}
+}
+</style>
+</head>
+<body>
+
+
+<canvas id="snow" aria-hidden="true"></canvas>
+
+<div class="garland" aria-hidden="true">
+  <svg viewBox="0 0 1000 56" preserveAspectRatio="none"><path d="M0 6 Q 62 34 125 10 T 250 10 T 375 10 T 500 10 T 625 10 T 750 10 T 875 10 T 1000 10" fill="none" stroke="#2f3d34" stroke-width="2.5"/></svg>
+  <div class="bulbs" id="bulbs"></div>
+</div>
+
+<div class="wrap">
+  <nav>
+    <a class="logo" href="#top">Merry<span>beam</span></a>
+    <a class="navcta" href="#order">Shop now</a>
+  </nav>
+  <header class="hero" id="top">
+    <div>
+      <div class="eyebrow">The tiny tree that lights up the whole room</div>
+      <h1>Turn any room into <em>Christmas night.</em></h1>
+      <p>Plug it into any USB, bend it toward the ceiling and watch Santa, snowflakes and stars fill the room.</p>
+      <div class="cta-row">
+        <a class="btn" href="#order">Light up my room →</a>
+      </div>
+      <div class="facts">
+        <span><b>USB powered</b>, works anywhere</span>
+        <span><b>Gift box</b> included</span>
+        <span><b>Ships in 1–2 days</b></span>
+      </div>
+    </div>
+    <div class="stage">
+      <canvas id="sky" aria-hidden="true"></canvas>
+      <div class="badge" aria-hidden="true"><div><b>2 for</b>$39.99</div></div>
+      <div class="phone">
+        <video src="img/reveal.mp4" poster="img/reveal-poster.jpg" autoplay muted loop playsinline aria-label="Merrybeam lighting up a bedroom ceiling with Santa and snowflakes"></video>
+      </div>
+    </div>
+  </header>
+</div>
+
+<div class="strip">
+  <div class="wrap" aria-live="polite">
+    <span class="msg" id="xmsg">Christmas is coming</span>
+    <div class="unit"><span class="num" id="cd-d">00</span><span class="lbl">days</span></div>
+    <div class="unit"><span class="num" id="cd-h">00</span><span class="lbl">hours</span></div>
+    <div class="unit"><span class="num" id="cd-m">00</span><span class="lbl">minutes</span></div>
+    <div class="unit"><span class="num" id="cd-s">00</span><span class="lbl">seconds</span></div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="sec-h">
+      <div class="eyebrow">Up in five seconds</div>
+      <h2>No ladder. No tangled lights.</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><h3>Plug it in</h3><p>Any USB works: a phone charger, laptop, power bank, even a car charger.</p></div>
+      <div class="step"><h3>Bend it up</h3><p>The metal neck bends 360° and holds any angle. Point it at the ceiling or a wall.</p></div>
+      <div class="step"><h3>Lights out</h3><p>Turn off the lamps and the room fills with Christmas.</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap split">
+    <div class="copy">
+      <div class="eyebrow">Cute even when it's off</div>
+      <h2>A little tree that glows on its own.</h2>
+      <p>The tree and wreath are covered in tiny warm lights and red berries, so it looks like a decoration on the desk before it ever touches the ceiling.</p>
+      <ul class="ticks">
+        <li>360° bendable metal neck</li>
+        <li>Warm LED lights on the tree and wreath</li>
+        <li>5V USB, plug and play</li>
+      </ul>
+    </div>
+    <div class="media photo"><img src="img/cozy.jpg" alt="Merrybeam tree projector glowing on a wooden table next to a candle" width="900" height="900" loading="lazy"></div>
+  </div>
+</section>
+
+<section class="gift">
+  <div class="wrap split">
+    <div class="media photo"><img src="img/giftbox.jpg" alt="Merrybeam in its Christmas gift box with red tissue paper" width="609" height="490" loading="lazy"></div>
+    <div class="copy">
+      <div class="eyebrow" style="color:#ffd98a">Ready to give</div>
+      <h2>Comes in a Christmas gift box.</h2>
+      <p>No wrapping needed. It's the perfect stocking stuffer, Secret Santa gift or "thinking of you" for anyone who loves Christmas a little too much.</p>
+      <a class="btn" href="#order" style="justify-self:start;background:var(--gold);color:#2a1a02">Get the 2-pack →</a>
+    </div>
+  </div>
+</section>
+
+<section id="order">
+  <div class="wrap">
+    <div class="sec-h">
+      <div class="eyebrow">Order by December 15 for Christmas delivery</div>
+      <h2>Pick your pack</h2>
+    </div>
+    <div class="order">
+      <div class="packs" role="group" aria-label="Pack">
+        <button class="pack" id="pack-1" data-pack="1" aria-pressed="false">
+          <span class="dot" aria-hidden="true"></span>
+          <div><strong>One Merrybeam</strong><span>For one room</span></div>
+          <div class="price">$24.99<s>+ $4.99 shipping</s></div>
+        </button>
+        <button class="pack" id="pack-2" data-pack="2" aria-pressed="true">
+          <i class="tag">Best gift</i>
+          <span class="dot" aria-hidden="true"></span>
+          <div><strong>Two Merrybeams</strong><span>One for you, one to give away</span></div>
+          <div class="price">$39.99<s>Free shipping</s></div>
+        </button>
+        <div class="mini">
+          <div class="photo"><img src="img/ceiling.jpg" alt="Projected Santa and snowflakes on a bedroom ceiling" width="900" height="1600" loading="lazy"></div>
+          <div class="photo"><img src="img/tree.jpg" alt="Merrybeam projector with bendable neck and wreath USB base" width="405" height="600" loading="lazy" style="background:#fff;object-fit:contain"></div>
+        </div>
+      </div>
+      <aside class="cart" aria-live="polite">
+        <h3>Your order</h3>
+        <div class="row"><span class="k">Item</span><span id="cItem">2 × Merrybeam</span></div>
+        <div class="row"><span class="k">Shipping</span><span id="cShip">Free</span></div>
+        <hr>
+        <div class="row" style="align-items:end"><span class="k">Total</span><span class="total" id="cTotal">$39.99</span></div>
+        <button class="btn" id="checkout">Checkout securely</button>
+        <div class="flash" id="flash" hidden></div>
+        <p class="note">Card, Apple Pay, Cash App &amp; Klarna via Stripe</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap split">
+    <div class="media phone" style="width:min(100%,300px);justify-self:center">
+      <video src="img/hero.mp4" poster="img/hero-poster.jpg" autoplay muted loop playsinline aria-label="Plugging in the projector and lighting up a living room"></video>
+    </div>
+    <div class="copy">
+      <div class="eyebrow">The easiest decoration you'll put up</div>
+      <h2>Plug in. Done.</h2>
+      <p>No hooks, no ladders, no untangling lights in the garage. It goes up in five seconds and comes down just as fast after the holidays.</p>
+      <a class="btn" href="#order" style="justify-self:start">Get yours</a>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-h"><div class="eyebrow">Questions</div><h2>Good to know</h2></div>
+    <div class="faq">
+      <details><summary>What powers it?</summary><p>It runs on 5V USB. Plug it into a phone charger, laptop, power bank or car charger. No batteries needed.</p></details>
+      <details><summary>Does it need a dark room?</summary><p>It looks best with the lights off or dimmed. In a fully lit room the projection is much softer.</p></details>
+      <details><summary>When will it arrive?</summary><p>Orders ship from Myrtle Beach, SC within 1–2 business days, and most arrive 2–5 business days after that. Order by December 15 to get it before Christmas.</p></details>
+      <details><summary>Can I return it?</summary><p>Yes. Unused items can be returned within 30 days. If yours arrives damaged, send us a photo and we'll replace it.</p></details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="big">Merry<span>beam</span></div>
+    <span>© 2026 Merrybeam · Myrtle Beach, SC</span>
+  </div>
+</footer>
+
+<script>
+const $ = id => document.getElementById(id);
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* garland bulbs */
+(function(){
+  const colors=["#ff4d5a","#ffc24a","#3fd17a","#5aa9ff","#ff8a3d"], n = innerWidth<600 ? 12 : 22, wrap=$("bulbs");
+  for(let i=0;i<n;i++){
+    const b=document.createElement("i"); b.className="bulb";
+    b.style.setProperty("--c",colors[i%colors.length]);
+    b.style.setProperty("--y",(8+Math.round(12*Math.abs(Math.sin(i*1.3))))+"px");
+    b.style.setProperty("--t",(0.9+((i*37)%10)/10)+"s");
+    b.style.setProperty("--d",(-((i*53)%17)/10)+"s");
+    wrap.appendChild(b);
+  }
+})();
+
+/* falling snow */
+(function(){
+  const c=$("snow"), x=c.getContext("2d"); let w,h,flakes=[];
+  function size(){ w=c.width=innerWidth*devicePixelRatio; h=c.height=innerHeight*devicePixelRatio;
+    const n=Math.round(Math.min(110, innerWidth/12));
+    flakes=Array.from({length:n},()=>({x:Math.random()*w,y:Math.random()*h,r:(Math.random()*2+.6)*devicePixelRatio,s:Math.random()*.6+.3,o:Math.random()*Math.PI*2}));
+  }
+  size(); addEventListener("resize",size);
+  function draw(){
+    x.clearRect(0,0,w,h); x.fillStyle="rgba(255,255,255,.75)";
+    for(const f of flakes){ x.beginPath(); x.arc(f.x,f.y,f.r,0,7); x.fill();
+      if(!reduce){ f.y+=f.s*devicePixelRatio; f.o+=.01; f.x+=Math.sin(f.o)*.3*devicePixelRatio; if(f.y>h){f.y=-5;f.x=Math.random()*w;} } }
+    if(!reduce) requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* projector sky: shapes rotating around a hidden lens, like the real thing */
+(function(){
+  const c=$("sky"), x=c.getContext("2d"); let w,h,shapes=[],a=0;
+  const cols=["#ff4d5a","#3fd17a","#ffc24a","#ffffff","#5aa9ff"];
+  function size(){ const r=c.getBoundingClientRect(); w=c.width=r.width*devicePixelRatio; h=c.height=r.height*devicePixelRatio;
+    shapes=Array.from({length:46},(_,i)=>({k:i%4, d:Math.sqrt(Math.random())*Math.max(w,h)*.62, t:Math.random()*Math.PI*2, s:(Math.random()*14+8)*devicePixelRatio, c:cols[i%cols.length], sp:Math.random()*.5+.75}));
+  }
+  function star(r){ x.beginPath(); for(let i=0;i<10;i++){ const rr=i%2?r*.45:r, an=i*Math.PI/5-Math.PI/2; x.lineTo(Math.cos(an)*rr,Math.sin(an)*rr);} x.closePath(); x.fill(); }
+  function flake(r){ x.lineWidth=Math.max(1.5,r*.14); for(let i=0;i<6;i++){ x.rotate(Math.PI/3); x.beginPath(); x.moveTo(0,0); x.lineTo(0,-r); x.moveTo(0,-r*.55); x.lineTo(r*.25,-r*.8); x.moveTo(0,-r*.55); x.lineTo(-r*.25,-r*.8); x.stroke(); } }
+  function tree(r){ x.beginPath(); x.moveTo(0,-r); x.lineTo(r*.7,r*.15); x.lineTo(r*.35,r*.15); x.lineTo(r*.8,r*.8); x.lineTo(-r*.8,r*.8); x.lineTo(-r*.35,r*.15); x.lineTo(-r*.7,r*.15); x.closePath(); x.fill(); }
+  function gift(r){ x.fillRect(-r*.6,-r*.4,r*1.2,r*1.1); x.fillStyle="rgba(0,0,0,.35)"; x.fillRect(-r*.1,-r*.4,r*.2,r*1.1); }
+  function draw(){
+    x.clearRect(0,0,w,h);
+    const g=x.createRadialGradient(w/2,h/2,0,w/2,h/2,Math.max(w,h)*.6); g.addColorStop(0,"rgba(255,194,74,.16)"); g.addColorStop(1,"rgba(255,194,74,0)");
+    x.fillStyle=g; x.fillRect(0,0,w,h);
+    for(const s of shapes){
+      const an=s.t+a*s.sp, px=w/2+Math.cos(an)*s.d, py=h/2+Math.sin(an)*s.d*.8;
+      x.save(); x.translate(px,py); x.rotate(an*.5); x.globalAlpha=.85; x.fillStyle=s.c; x.strokeStyle=s.c;
+      x.shadowColor=s.c; x.shadowBlur=12*devicePixelRatio;
+      [star,flake,tree,gift][s.k](s.s); x.restore();
+    }
+    if(!reduce){ a+=.0025; requestAnimationFrame(draw); }
+  }
+  size(); addEventListener("resize",size); draw();
+})();
+
+/* countdown */
+(function(){
+  const pad=n=>String(n).padStart(2,"0");
+  function tick(){
+    const now=new Date(); let y=now.getFullYear(); if(now>new Date(y,11,26)) y++;
+    const diff=new Date(y,11,25)-now;
+    if(diff<=0){ $("xmsg").textContent="Merry Christmas!"; ["d","h","m","s"].forEach(k=>$("cd-"+k).textContent="00"); return; }
+    $("cd-d").textContent=pad(Math.floor(diff/864e5)); $("cd-h").textContent=pad(Math.floor(diff/36e5)%24);
+    $("cd-m").textContent=pad(Math.floor(diff/6e4)%60); $("cd-s").textContent=pad(Math.floor(diff/1e3)%60);
+  }
+  tick(); setInterval(tick,1000);
+})();
+
+/* order */
+let pack=2;
+function render(){
+  document.querySelectorAll("[data-pack]").forEach(b=>b.setAttribute("aria-pressed",String(+b.dataset.pack===pack)));
+  $("cItem").textContent = pack===2 ? "2 × Merrybeam" : "1 × Merrybeam";
+  $("cShip").textContent = pack===2 ? "Free" : "$4.99";
+  $("cTotal").textContent = pack===2 ? "$39.99" : "$29.98";
+  $("flash").hidden=true;
+}
+document.querySelectorAll("[data-pack]").forEach(b=>b.addEventListener("click",()=>{ pack=+b.dataset.pack; render(); }));
+$("checkout").addEventListener("click", async ()=>{
+  const btn=$("checkout"), flash=$("flash");
+  flash.hidden=true; btn.disabled=true; btn.textContent="Opening checkout…";
+  try{
+    const r=await fetch("/.netlify/functions/checkout",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({pack})});
+    const d=await r.json().catch(()=>({}));
+    if(!r.ok||!d.url) throw new Error(d.error||"Checkout is unavailable right now.");
+    window.location.href=d.url;
+  }catch(e){
+    flash.textContent=e.message+" Please try again in a minute.";
+    flash.hidden=false; btn.disabled=false; btn.textContent="Checkout securely";
+  }
+});
+render();
+</script>
+
+</body>
+</html>
